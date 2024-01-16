@@ -3,6 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
+<<<<<<< HEAD
   knex.schema.hasTable('users').then(function (exists) {
     if (!exists) {
       return knex.schema.createTable('homes', function (table) {
@@ -17,6 +18,18 @@ exports.up = function (knex) {
       })
     }
   })
+=======
+    knex.schema.hasTable('users').then(function(exists) {
+        if(!exists){
+            return knex.schema.createTable('users', function (t) {
+                t.increments('id').primary()
+                t.string('first_name', 100)
+                t.string('last_name', 100)
+                t.text('bio')
+            })
+        }
+    })
+>>>>>>> 3b92131f4188fd4bf1fc349e09f856cef9e4b8b3
 }
 
 /**

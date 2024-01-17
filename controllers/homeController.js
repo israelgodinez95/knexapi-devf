@@ -23,7 +23,51 @@ const findAllHomes = (req, res) => {
     })
 }
 
+const findOneHome = (req, res) => {
+  ModelHomes.findOne(req.params.houseId)
+    .then((result) => {
+      res.status(200).send(result)
+    })
+    .catch((error) => {
+      res.status(400).send({ message: 'Error listing house', error })
+    })
+}
+
+const updateOneHome = (req, res) => {
+  ModelHomes.update(req.params.houseId, req.body)
+    .then((result) => {
+      res.status(200).send(result)
+    })
+    .catch((error) => {
+      res.status(400).send({ message: 'Error updating house', error })
+    })
+}
+
+const destroyOneHome = (req, res) => {
+  ModelHomes.destroy(req.params.houseId)
+    .then((result) => {
+      res.status(204).send()
+    })
+    .catch((error) => {
+      res.status(400).send({ message: 'Error destroying house', error })
+    })
+}
+
+const softDeleteOneHome = (req, res) => {
+  ModelHomes.softDelete(req.params.houseId)
+    .then((result) => {
+      res.status(204).send()
+    })
+    .catch((error) => {
+      res.status(400).send({ message: 'Error destroying house', error })
+    })
+}
+
 module.exports = {
   createHome,
-  findAllHomes
+  findAllHomes,
+  findOneHome,
+  updateOneHome,
+  destroyOneHome,
+  softDeleteOneHome
 }
